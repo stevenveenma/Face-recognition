@@ -1,7 +1,5 @@
 # Face-recognition
-Face detection and face recognition using deep learning
-
-Face recognition on normal photographs/snapshots is done in two steps:
+Face detection and face recognition using deep learning. Face recognition on normal photographs/snapshots is done in two steps:
 1. Detecting faces on pictures and cropping them to the right size
 2. Face recognition using a classification algorithm
 
