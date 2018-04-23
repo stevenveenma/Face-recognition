@@ -33,7 +33,7 @@ The final step was building a small pipeline ('predict_picturebook') that reads 
 Face recognition can be useful for various use cases in for instance security, robotization or domotica. One of my motivations to dive into this subject was my struggle with my photo collection. With the current availability of photo devices, whether they are DSLR's or smart phones the number of images taken is increasing. I am rather lazy in sorting the pictures. From time to time I drop pictures of myself and my family on the NAS, that evolved to an unstructured collection of hundreds of gigabites. I can sort a bit on time and directory names, but when I want to find pictures of a specific person I don't have any instruments. With the notebooks that I developed I can crawl this directory structure and generate a list of found faces that I can use to search for pictures 
 
 #### Future plans
-While I worked on this topic I got some ideas for future plans:
+I got some ideas for future plans:
 - I found that Opencv can be used to detect faces in video. I even found that it can be used on a RPI. I have done some interesting things using a RPI in the past: making a crossover filter and digital sound processor, probably worth another Github repository :-)  So it would be interesting to see if I can get Opencv to work on it. 
 - VGG is also trained on object detection. Probably I can use this model to add objects (including dogs and cats) to my photograph/snapshot detection to make an even more complete 'content detection' algorithm. 
 
