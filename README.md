@@ -1,4 +1,4 @@
-Face detection and face recognition using deep learning 
+# Face detection and face recognition using deep learning 
 
 Being a data scientist I am attracted by the possibilities of machine learning, especially deep learning. Recently I dived into the object and face recognition world of Python. I learned a lot and although  many tutorials are available I sometimes found it difficult to get a complete view on the things I needed. So I decided to share a selection of my notebooks on Github to help others who are interested in this topic. This repository is not a complete tutorial. I will give some clarification below and added comments to my notebooks. But for more background I refer to the resources mentioned in the text and elsewhere.  
 
@@ -7,7 +7,7 @@ Face recognition on normal photographs/snapshots is done in two steps:
 	- Face recognition using a classification algorithm
 For both steps (deep) neural networks can be used.
 
-Detecting faces on pictures
+## Detecting faces on pictures
 
 The Opencv package is very usefull for the first step (face detection). For some years the so called haarcascades provide an easy and fast way to detect images. The haarcascade is an XML file that can be downloaded from opencv and saved in a folder on your environment so it can be read by Python. There are more versions of these cascades, for instance eye cascade. I tried the eyecascade additional to haarcascade but found the results disappointing.  With the latest version of Opencv a new algorithm has been released that consist of a serialized deep learning model. This model can be downloaded (2 files) I spend some time comparing both the haarcascade and this deep learning on a set of pictures. My conclusions are:
 	- Haarcascade finds many faces in the front and background but (dependent of the settings) makes many errors.
@@ -15,7 +15,7 @@ The Opencv package is very usefull for the first step (face detection). For some
 
 Probably the limitations of Opencv's deeplearning are caused by the size of the input image (300x300 pixels) while haarcascade is using the entire size (but uses no colors). So my idea was to make use of the best of both worlds and use both models. First haarcascase is used to generate possible faces by using settings that generate many faces but lead to many errors. The candidates are cropped and these cropped images are fed to the deep learning net. So deep learning receives candidate faces of a large size and with this input can better confirm if the candidates are real faces. This two steps face detection leads to better results: more faces detected and less errors. In the notebook cv2-compare this is demonstrated. I made an additional notebook cv2_readbatch that crawls over local or network folders to find images and uses this two steps face detection to find faces. 
 
-Face recognition
+## Face recognition
 
 Having experience with Python, the Keras package and Tensorflow I have tried the VGG16 deep learning model for object detection in the past. The VGG model was developed some years ago and won the image classification task in 2014. Although new models were developed it still performs very well and can be used for free. The face recognition version of the model has the same architecture but is trained on 2622 identities and multiple images. The accuracy of the model is above 95%. Resources for Python and Keras can be found here https://github.com/rcmalli/keras-vggface. The model recently has been retrained using RESNET50 or SENET50. I haven't tried these until so far as the genuine model performed very well.
 
@@ -28,11 +28,12 @@ Face recognition is a typical classification task. Before predictions can be mad
 
 The final step was building a small pipeline ('predict_picturebook') that reads pictures in different folders, preprocesses the pictures, classifies  the pictures with the stored model and returns an overview of the results. In this way unknown faces are read, preprocessed and input for the restored model. Unfortunately the model doesn't contain an unknown category, so these faces are classified against known classes. To solve this issue I decided to use the probability of the predictions. With known faces the probability is usually 0.95 or higher. Unknown faces lead to probabilities that are spread across different labels and are usually below 0.5. So I use this threshold to determine the unknown faces. Unknown faces can be collected and when enough faces are there they can be labelled and the model can be retrained. Doing this in multiple iterations the most common faces can be detected and labelled and the model will be more robust.
 
-Use case photograph/snapshot collection
+####### Use case photograph/snapshot collection
 
 One of my motivations to dive into this subject was my struggle with my photo collection. With the current availability of photo devices, whether they are DSLR's or smart phones the number of images taken is increasing. I am rather lazy in sorting the pictures. From time to time I drop pictures of myself and my family on the NAS, that evolved to an unstructured collection of hundreds of gigabites. I can sort a bit on time and directory names, but when I want to find pictures of a specific person I don't have any instruments. With the notebooks that I developed I can crawl this directory structure an generate a list of found faces that I can use to search for pictures 
 
-Future plans
+###### Future plans:
+
 	- I found that Opencv can be used to detect faces in video. I even found that it can be used on a RPI. I have done some interesting things using a RPI in the past: making a crossover filter and digital sound processor, probably worth another Github repository :-)  So it would be interesting to see if I can get Opencv to work on it. 
 	- VGG is also trained on object detection. Probably I can use this model to add objects (including dogs and cats) to my photograph/snapshot detection to make an even more complete 'content detection' algorithm. 
 
