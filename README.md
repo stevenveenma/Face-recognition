@@ -3,8 +3,8 @@
 Being a data scientist I am attracted by the possibilities of machine learning and especially deep learning. Recently I dived into the object and face recognition world of Python. I learned a lot and although  many tutorials are available I sometimes found it difficult to get a complete view on the things I needed. So I decided to share a selection of my notebooks on Github to help others who are interested in this topic. This repository is not a complete tutorial. I will give some clarification below and added comments to my notebooks. But for more background I refer to the resources mentioned in the text and elsewhere.  
 
 Face recognition on normal photographs/snapshots is done in two steps:
-	- Detecting faces on pictures and cropping them to the right size
-	- Face recognition using a classification algorithm
+- Detecting faces on pictures and cropping them to the right size
+- Face recognition using a classification algorithm
 For both steps (deep) neural networks can be used.
 
 ## Detecting faces on pictures
